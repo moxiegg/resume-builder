@@ -19,12 +19,23 @@ form {
   grid-template-columns: 1fr 1fr;
   gap: 10px;
 }
+.educationElement{
+  display:flex;
+  flex-direction: column;
+  gap:20px;
+}
+.educationInfo{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:10px;
+}
 label {
   text-align: right;
 }
 .title {
   border-bottom: 2px solid black;
   grid-column: 1/3;
+
 }
 .formButton {
   width: max-content;
