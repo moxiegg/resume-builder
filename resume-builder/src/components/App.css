@@ -4,10 +4,11 @@ body {
   justify-content: center;
   align-items: center;
   margin: 0;
+  font-size: 18px;
 }
 form {
   display: grid;
-  width: min-content;
+  width: max-content;
   gap: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border: 1px solid #e0e0e0;
@@ -16,13 +17,23 @@ form {
 }
 .formElement {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 3fr;
   gap: 10px;
 }
 .educationElement{
   display:flex;
   flex-direction: column;
   gap:20px;
+}
+.title{
+  display: flex;
+  justify-content: space-between;
+  padding-bottom:10px;
+  font-size: 20px;
+}
+.title button{
+  font-size: 20px;
+  padding:0px 10px;
 }
 .educationInfo{
   display:grid;

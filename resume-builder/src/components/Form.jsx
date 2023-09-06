@@ -6,6 +6,7 @@ export default function Form({
   projectInfo,
   handleChange,
   handleSubmit,
+  handleAdd,
 }) {
   if (!personInfo) return <div>Error</div>;
   return (
@@ -38,9 +39,21 @@ export default function Form({
         />
       </div>
       <div className="educationElement">
-        <div className="title">Education</div>
+        <div className="title">
+          <div>Education</div>
+          <div>
+            <button type="button" className="formButton" data-info="education" onClick={handleAdd}>
+              +
+            </button>
+          </div>
+        </div>
         {educationInfo.map((obj, i) => (
-          <div className="educationInfo" key={"education"+i} data-info="education" data-index={i}>
+          <div
+            className="formElement"
+            key={"education" + i}
+            data-info="education"
+            data-index={i}
+          >
             <label htmlFor="institute">Institute: </label>
             <input
               type="text"
@@ -51,20 +64,20 @@ export default function Form({
             <label htmlFor="course">Course: </label>
             <input
               type="text"
-              name="from"
+              name="course"
               value={educationInfo[i].course}
               onChange={handleChange}
             ></input>
             <label htmlFor="from">From: </label>
             <input
-              type="text"
+              type="date"
               name="from"
               value={educationInfo[i].from}
               onChange={handleChange}
             ></input>
             <label htmlFor="to">To: </label>
             <input
-              type="text"
+              type="date"
               name="to"
               value={educationInfo[i].to}
               onChange={handleChange}
@@ -72,81 +85,47 @@ export default function Form({
           </div>
         ))}
       </div>
-      {/* <label htmlFor="institute"> Institute: </label>
-        <input
-          type="text"
-          name="institute"
-          id=""
-          value={educationInfo[0].institute}
-          onChange={handleChange}
-        />
-        <label htmlFor="course"> Course: </label>
-        <input
-          type="text"
-          name="course"
-          id=""
-          value={educationInfo[0].course}
-          onChange={handleChange}
-        />
-        <label htmlFor="from">From:</label>
-        <input
-          type="date"
-          name="from"
-          id=""
-          value={educationInfo[0].from}
-          onChange={handleChange}
-        />
-        <label htmlFor="to">To:</label>
-        <input
-          type="date"
-          name="to"
-          id=""
-          value={educationInfo[0].to}
-          onChange={handleChange}
-        />
-      </div> */}
-      <div className="formElement" id="project" data-index="0">
-        <div className="title">Personal Projects</div>
-        <label htmlFor="projectTitle"> Project Title: </label>
-        <input
-          type="text"
-          name="projectTitle"
-          id=""
-          value={projectInfo[0].projectTitle}
-          onChange={handleChange}
-        />
-        <label htmlFor="techStack"> Tech Stack: </label>
-        <input
-          type="text"
-          name="techStack"
-          id=""
-          value={projectInfo[0].techStack}
-          onChange={handleChange}
-        />
-        <label htmlFor="description">Description:</label>
-        <textarea
-          name="description"
-          rows="4"
-          cols="20"
-          id=""
-          value={projectInfo[0].description}
-          onChange={handleChange}
-        ></textarea>
-      </div>
-      <div className="formElement" id="project">
-        <label htmlFor="projectTitle"> Project Title: </label>
-        <input type="text" name="projectTitle" id="" onChange={handleChange} />
-        <label htmlFor="techStack"> Tech Stack: </label>
-        <input type="text" name="techStack" id="" onChange={handleChange} />
-        <label htmlFor="description">Description:</label>
-        <textarea
-          name="description"
-          rows="4"
-          cols="20"
-          id=""
-          onChange={handleChange}
-        ></textarea>
-      </div>
+      <div className="educationElement">
+        <div className="title">
+          <div>Personal Projects</div>
+          <div>
+            <button type="button" className="formButton" data-info="project" onClick={handleAdd}>
+              +
+            </button>
+          </div>
+        </div>
+        {projectInfo.map((obj, i) => (
+          <div
+            className="formElement"
+            key={"project" + i}
+            data-info="project"
+            data-index={i}
+          >
+            <label htmlFor="institute">Project Title: </label>
+            <input
+              type="text"
+              name="projectTitle"
+              value={obj.projectTitle}
+              onChange={handleChange}
+            ></input>
+            <label htmlFor="course">Tech Stack: </label>
+            <input
+              type="text"
+              name="techStack"
+              value={obj.techStack}
+              onChange={handleChange}
+            ></input>
+            <label htmlFor="from">Description: </label>
+            <textarea
+              name="description"
+              value={obj.description}
+              onChange={handleChange}
+              rows="4"
+              cols="20"
+            ></textarea>
+          </div>
+        ))}
+        </div>
       <button type="submit" className="formButton">
         Submit
       </button>

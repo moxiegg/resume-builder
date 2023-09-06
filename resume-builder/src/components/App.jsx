@@ -8,30 +8,28 @@ const personObj = {
   mobile: 9999999999,
 };
 
-const educationObj = [
-  {
-    institute: "XYZ University",
-    course: "ABC",
-    from: "2023-01-01",
-    to: "2025-01-01",
-  },
-  {
-    institute: "XYZ University",
-    course: "ABC",
-    from: "2023-01-01",
-    to: "2025-01-01",
-  },
-];
+// const educationObj = [
+//   {
+//     institute: "XYZ University",
+//     course: "ABC",
+//     from: "2023-01-01",
+//     to: "2025-01-01",
+//   },
+//   {
+//     institute: "XYZ University",
+//     course: "ABC",
+//     from: "2023-01-01",
+//     to: "2025-01-01",
+//   },
+// ];
+const educationObj = { institute: "", course: "", from: "", to: "" };
+const projectObj = { projectTitle: "", techStack: "", description: "" };
 
-const projectObj = [
-  { projectTitle: "", techStack: "", description: "" },
-  { projectTitle: "", techStack: "", description: "" },
-];
 export default function App() {
   const [isSubmit, setSubmit] = useState(false);
   const [personInfo, setPersonInfo] = useState(personObj);
-  const [projectInfo, setProject] = useState(projectObj);
-  const [educationInfo, setEducation] = useState(educationObj);
+  const [projectInfo, setProject] = useState([projectObj]);
+  const [educationInfo, setEducation] = useState([educationObj]);
 
   const handleChange = (e) => {
     const attr = e.target.name;
@@ -57,12 +55,23 @@ export default function App() {
       setEducation(temp);
     }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmit(true);
   };
+
   const handleEdit = () => {
     setSubmit(false);
+  };
+
+  const handleAdd = (e) => {
+    const ele = e.target.getAttribute("data-info");
+    if (ele == "education") {
+      setEducation([...educationInfo, { educationObj }]);
+    } else if (ele == "project") {
+      setProject([...projectInfo, projectObj]);
+    }
   };
   if (!isSubmit) {
     return (
@@ -72,6 +81,7 @@ export default function App() {
         educationInfo={educationInfo}
         handleSubmit={handleSubmit}
         handleChange={handleChange}
+        handleAdd={handleAdd}
       ></Form>
     );
   } else {
