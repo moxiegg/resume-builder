@@ -7,12 +7,12 @@ export default function Form({
   handleChange,
   handleSubmit,
   handleAdd,
-  toggleSelect
+  toggleSelect,
 }) {
   if (!personInfo) return <div>Error</div>;
   return (
     <form onSubmit={handleSubmit}>
-      <div className="formElement" id="person">
+      <div className="formElement" data-info="person">
         <div className="title">Personal Info</div>
         <label htmlFor="name"> Name: </label>
         <input
@@ -55,7 +55,6 @@ export default function Form({
         </div>
         {educationInfo.map((obj, i) => {
           if (obj.selected) {
-            console.log(obj.selected)
             return (
               <div
                 className="formElement"
@@ -93,10 +92,18 @@ export default function Form({
                 ></input>
               </div>
             );
-          }else{
+          } else {
             return (
-              <div key={"education"+i} onClick={toggleSelect} data-index={i} className="toggleDetail">{obj.institute}</div>
-            )
+              <div
+                key={"education" + i}
+                onClick={toggleSelect}
+                data-info="education"
+                data-index={i}
+                className="toggleDetail"
+              >
+                {obj.institute}
+              </div>
+            );
           }
         })}
       </div>
@@ -114,37 +121,54 @@ export default function Form({
             </button>
           </div>
         </div>
-        {projectInfo.map((obj, i) => (
-          <div
-            className="formElement"
-            key={"project" + i}
-            data-info="project"
-            data-index={i}
-          >
-            <label htmlFor="institute">Project Title: </label>
-            <input
-              type="text"
-              name="projectTitle"
-              value={obj.projectTitle}
-              onChange={handleChange}
-            ></input>
-            <label htmlFor="course">Tech Stack: </label>
-            <input
-              type="text"
-              name="techStack"
-              value={obj.techStack}
-              onChange={handleChange}
-            ></input>
-            <label htmlFor="from">Description: </label>
-            <textarea
-              name="description"
-              value={obj.description}
-              onChange={handleChange}
-              rows="4"
-              cols="20"
-            ></textarea>
-          </div>
-        ))}
+        {projectInfo.map((obj, i) => {
+          if (obj.selected) {
+            return (
+              <div
+              className="formElement"
+              key={"project" + i}
+              data-info="project"
+              data-index={i}
+              >
+                <label htmlFor="institute">Project Title: </label>
+                <input
+                  type="text"
+                  name="projectTitle"
+                  value={obj.projectTitle}
+                  onChange={handleChange}
+                ></input>
+                <label htmlFor="techStack">Tech Stack: </label>
+                <input
+                  type="text"
+                  name="techStack"
+                  value={obj.techStack}
+                  onChange={handleChange}
+                ></input>
+                <label htmlFor="description">Description: </label>
+                <textarea
+                  name="description"
+                  value={obj.description}
+                  onChange={handleChange}
+                  rows="4"
+                  cols="20"
+                ></textarea>
+              </div>
+            );
+          }else{
+            return (
+              <div
+                key={"project" + i}
+                onClick={toggleSelect}
+                data-index={i}
+                data-info="project"
+                className="toggleDetail"
+              >
+                {obj.projectTitle}
+              </div>
+            );
+            
+          }
+        })}
       </div>
       <button type="submit" className="formButton">
         Submit

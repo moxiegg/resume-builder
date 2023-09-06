@@ -22,39 +22,58 @@ const personObj = {
 //     to: "2025-01-01",
 //   },
 // ];
-function educationObj(){
-  return { institute: "ABC University", course: "XYZ", from: "", to: "",selected:true };
+function educationObj() {
+  return {
+    institute: "ABC University",
+    course: "XYZ",
+    from: "",
+    to: "",
+    selected: true,
+  };
 }
-const projectObj = { projectTitle: "", techStack: "", description: "" ,selected:true};
+function projectObj() {
+  return { projectTitle: "Cool Site", techStack: "", description: "", selected: true };
+}
 
 export default function App() {
   const [isSubmit, setSubmit] = useState(false);
   const [personInfo, setPersonInfo] = useState(personObj);
-  const [projectInfo, setProject] = useState([projectObj]);
+  const [projectInfo, setProject] = useState([new projectObj()]);
   const [educationInfo, setEducation] = useState([new educationObj()]);
 
-  const toggleSelect =(e)=>{
+  const toggleSelect = (e) => {
     const ind = e.target.getAttribute("data-index");
-    const temp = educationInfo.map((obj, i) => {
-      if (i == ind) {
-        console.log(i)
-        obj.selected = true;
-        return obj;
-      } else {
-        obj.selected=false;
-        return obj;
-      }
-    });
-    console.log(temp);
-    setEducation(temp);
-  }
+    const type = e.target.getAttribute("data-info");
+    if (type === "education") {
+      const temp = educationInfo.map((obj, i) => {
+        if (i == ind) {
+          obj.selected = true;
+          return obj;
+        } else {
+          obj.selected = false;
+          return obj;
+        }
+      });
+      setEducation(temp);
+    } else if (type === "project") {
+      const temp = projectInfo.map((obj, i) => {
+        if (i == ind) {
+          obj.selected = true;
+          return obj;
+        } else {
+          obj.selected = false;
+          return obj;
+        }
+      });
+      setProject(temp);
+    }
+  };
   const handleChange = (e) => {
     const attr = e.target.name;
     const value = e.target.value;
     const parentId = e.target.parentNode.getAttribute("data-info");
     const ind = e.target.parentNode.getAttribute("data-index");
-    console.log(ind);
-    if (parentId == "person") setPersonInfo({ ...personInfo, [attr]: value });
+    if (parentId == "person") setPersonInfo({...personInfo, [attr]: value });
     else if (parentId == "project") {
       const temp = projectInfo.map((obj, i) => {
         if (i == ind) {
@@ -78,25 +97,25 @@ export default function App() {
     e.preventDefault();
     setSubmit(true);
   };
-  
+
   const handleEdit = () => {
     setSubmit(false);
   };
-  
+
   const handleAdd = (e) => {
     const ele = e.target.getAttribute("data-info");
     if (ele == "education") {
       const temp = educationInfo.map((obj) => {
-        obj.selected=false;
+        obj.selected = false;
         return obj;
       });
-      setEducation([...temp,new educationObj()]);
+      setEducation([...temp, new educationObj()]);
     } else if (ele == "project") {
       const temp = projectInfo.map((obj) => {
-        obj.selected=false;
+        obj.selected = false;
         return obj;
       });
-      setProject([...temp, projectObj]);
+      setProject([...temp, new projectObj()]);
     }
   };
   if (!isSubmit) {

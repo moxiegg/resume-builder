@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Merriweather:wght@300&family=Montserrat:wght@300&family=Poppins:wght@200;300&family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+/* body{
+    width:min-content;    
+}
+form{
+    display:grid;
+    gap:20px;
+    box-shadow:0 2px 4px rgba(0,0,0,0.1);
+    border:1px solid #e0e0e0;
+    padding:40px;
+    margin:16px;
+}
+.formElement{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:10px;
+}
+label{
+    text-align: right;
+}
+.title{
+    border-bottom:2px solid black;
+    grid-column: 1/3;
+}
+.formButton{
+    padding:10px;
+    width:max-content;
+    justify-self: center;
+    border:2px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+} */
+body{
+    margin:0;
+    padding:20px;
+    box-sizing: border-box;
+    min-height: 100vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    /* font-family: 'Poppins', sans-serif; */
+    font-family: 'Noto Sans', sans-serif;
+
+}
+.resume-container{
+    display:flex;
+    flex-direction: column;
+    width:800px;
+    gap:20px;
+    border:2px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.header{
+    background-color:black;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    /* height: 50px; */
+    padding:40px;
+    /* margin-bottom:50px; */
+}
+.content{
+    padding:0px 30px 30px 30px;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+.name{
+    font-size:50px;
+}
+.contact-details{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.section{
+    display:flex;
+    flex-direction: column;
+    gap:15px;
+}
+.education-element{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.duration{
+    font-style:italic;
+    font-weight: lighter;
+    color:gray;
+}
+.section-title{
+    border-bottom:2px solid black;
+    text-transform: uppercase;
+    font-size:20px;
+}
+.uni-name,.project-title{
+    font-size:25px;
+}
+.sub-title{
+    font-style: italic;
+}
+.resumeContent{
+    display: flex;
+    flex-direction: column;
+}
+.resumeContent button{
+    align-self: center;
+    border:2px solid black;
+    color:black;
+    background-color: white;
+    font-size: large;
+    padding:5px 10px 5px 10px;
+}
+.resumeContent button:hover{
+    background-color: black;
+    color:white;
+}
+.resumeContent .title{
+    align-self: flex-start;
+    gap:20px;
+    justify-content: center;
+    border-bottom:none;
+}
