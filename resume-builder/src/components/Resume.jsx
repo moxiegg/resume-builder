@@ -1,7 +1,6 @@
 // import {useState} from 'react';
 import "./resume.css";
 /* eslint-disable react/prop-types */
-//TODO:create the style of a resume
 export default function Resume({
   personInfo,
   educationInfo,
@@ -16,6 +15,7 @@ export default function Resume({
         <div className="header">
           <div className="name">{personInfo.name}</div>
           <div className="contact-details">
+            {/* TODO:add appropriate SVGs */}
             <div>{personInfo.mobile}</div>
             <div>{personInfo.email}</div>
           </div>
@@ -30,6 +30,7 @@ export default function Resume({
                   <div className="sub-title">{obj.course}</div>
                 </div>
                 <div className="duration">
+                  {/* TODO:try formatting the date and add SVG */}
                   {obj.from} to {obj.to}
                 </div>
               </div>

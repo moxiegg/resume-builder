@@ -95,7 +95,7 @@ body{
     font-size:20px;
 }
 .uni-name,.project-title{
-    font-size:25px;
+    font-weight: bold;
 }
 .sub-title{
     font-style: italic;
@@ -110,7 +110,7 @@ body{
     color:black;
     background-color: white;
     font-size: large;
-    padding:5px 10px 5px 10px;
+    padding:5px 20px 5px 20px;
 }
 .resumeContent button:hover{
     background-color: black;

@@ -66,28 +66,30 @@ export default function Form({
                 <input
                   type="text"
                   name="institute"
-                  value={educationInfo[i].institute}
+                  value={obj.institute}
                   onChange={handleChange}
                 ></input>
                 <label htmlFor="course">Course: </label>
                 <input
                   type="text"
                   name="course"
-                  value={educationInfo[i].course}
+                  value={obj.course}
                   onChange={handleChange}
                 ></input>
+                {/* TODO:add logic for making sure the 'from' date is before 'to' date */}
                 <label htmlFor="from">From: </label>
                 <input
                   type="date"
                   name="from"
-                  value={educationInfo[i].from}
+                  value={obj.from}
                   onChange={handleChange}
-                ></input>
+                  ></input>
+                  {/* TODO:try adding logic for entering present in 'to' date */}
                 <label htmlFor="to">To: </label>
                 <input
                   type="date"
                   name="to"
-                  value={educationInfo[i].to}
+                  value={obj.to}
                   onChange={handleChange}
                 ></input>
               </div>
