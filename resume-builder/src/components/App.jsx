@@ -22,20 +22,38 @@ const personObj = {
 //     to: "2025-01-01",
 //   },
 // ];
-const educationObj = { institute: "", course: "", from: "", to: "" };
-const projectObj = { projectTitle: "", techStack: "", description: "" };
+function educationObj(){
+  return { institute: "ABC University", course: "XYZ", from: "", to: "",selected:true };
+}
+const projectObj = { projectTitle: "", techStack: "", description: "" ,selected:true};
 
 export default function App() {
   const [isSubmit, setSubmit] = useState(false);
   const [personInfo, setPersonInfo] = useState(personObj);
   const [projectInfo, setProject] = useState([projectObj]);
-  const [educationInfo, setEducation] = useState([educationObj]);
+  const [educationInfo, setEducation] = useState([new educationObj()]);
 
+  const toggleSelect =(e)=>{
+    const ind = e.target.getAttribute("data-index");
+    const temp = educationInfo.map((obj, i) => {
+      if (i == ind) {
+        console.log(i)
+        obj.selected = true;
+        return obj;
+      } else {
+        obj.selected=false;
+        return obj;
+      }
+    });
+    console.log(temp);
+    setEducation(temp);
+  }
   const handleChange = (e) => {
     const attr = e.target.name;
     const value = e.target.value;
     const parentId = e.target.parentNode.getAttribute("data-info");
     const ind = e.target.parentNode.getAttribute("data-index");
+    console.log(ind);
     if (parentId == "person") setPersonInfo({ ...personInfo, [attr]: value });
     else if (parentId == "project") {
       const temp = projectInfo.map((obj, i) => {
@@ -60,17 +78,25 @@ export default function App() {
     e.preventDefault();
     setSubmit(true);
   };
-
+  
   const handleEdit = () => {
     setSubmit(false);
   };
-
+  
   const handleAdd = (e) => {
     const ele = e.target.getAttribute("data-info");
     if (ele == "education") {
-      setEducation([...educationInfo, { educationObj }]);
+      const temp = educationInfo.map((obj) => {
+        obj.selected=false;
+        return obj;
+      });
+      setEducation([...temp,new educationObj()]);
     } else if (ele == "project") {
-      setProject([...projectInfo, projectObj]);
+      const temp = projectInfo.map((obj) => {
+        obj.selected=false;
+        return obj;
+      });
+      setProject([...temp, projectObj]);
     }
   };
   if (!isSubmit) {
@@ -82,6 +108,7 @@ export default function App() {
         handleSubmit={handleSubmit}
         handleChange={handleChange}
         handleAdd={handleAdd}
+        toggleSelect={toggleSelect}
       ></Form>
     );
   } else {

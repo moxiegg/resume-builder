@@ -7,6 +7,7 @@ export default function Form({
   handleChange,
   handleSubmit,
   handleAdd,
+  toggleSelect
 }) {
   if (!personInfo) return <div>Error</div>;
   return (
@@ -42,54 +43,73 @@ export default function Form({
         <div className="title">
           <div>Education</div>
           <div>
-            <button type="button" className="formButton" data-info="education" onClick={handleAdd}>
+            <button
+              type="button"
+              className="formButton"
+              data-info="education"
+              onClick={handleAdd}
+            >
               +
             </button>
           </div>
         </div>
-        {educationInfo.map((obj, i) => (
-          <div
-            className="formElement"
-            key={"education" + i}
-            data-info="education"
-            data-index={i}
-          >
-            <label htmlFor="institute">Institute: </label>
-            <input
-              type="text"
-              name="institute"
-              value={educationInfo[i].institute}
-              onChange={handleChange}
-            ></input>
-            <label htmlFor="course">Course: </label>
-            <input
-              type="text"
-              name="course"
-              value={educationInfo[i].course}
-              onChange={handleChange}
-            ></input>
-            <label htmlFor="from">From: </label>
-            <input
-              type="date"
-              name="from"
-              value={educationInfo[i].from}
-              onChange={handleChange}
-            ></input>
-            <label htmlFor="to">To: </label>
-            <input
-              type="date"
-              name="to"
-              value={educationInfo[i].to}
-              onChange={handleChange}
-            ></input>
-          </div>
-        ))}
+        {educationInfo.map((obj, i) => {
+          if (obj.selected) {
+            console.log(obj.selected)
+            return (
+              <div
+                className="formElement"
+                key={"education" + i}
+                data-info="education"
+                data-index={i}
+              >
+                <label htmlFor="institute">Institute: </label>
+                <input
+                  type="text"
+                  name="institute"
+                  value={educationInfo[i].institute}
+                  onChange={handleChange}
+                ></input>
+                <label htmlFor="course">Course: </label>
+                <input
+                  type="text"
+                  name="course"
+                  value={educationInfo[i].course}
+                  onChange={handleChange}
+                ></input>
+                <label htmlFor="from">From: </label>
+                <input
+                  type="date"
+                  name="from"
+                  value={educationInfo[i].from}
+                  onChange={handleChange}
+                ></input>
+                <label htmlFor="to">To: </label>
+                <input
+                  type="date"
+                  name="to"
+                  value={educationInfo[i].to}
+                  onChange={handleChange}
+                ></input>
+              </div>
+            );
+          }else{
+            return (
+              <div key={"education"+i} onClick={toggleSelect} data-index={i} className="toggleDetail">{obj.institute}</div>
+            )
+          }
+        })}
       </div>
       <div className="educationElement">
         <div className="title">
           <div>Personal Projects</div>
           <div>
-            <button type="button" className="formButton" data-info="project" onClick={handleAdd}>
+            <button
+              type="button"
+              className="formButton"
+              data-info="project"
+              onClick={handleAdd}
+            >
               +
             </button>
           </div>
@@ -125,7 +145,7 @@ export default function Form({
             ></textarea>
           </div>
         ))}
-        </div>
+      </div>
       <button type="submit" className="formButton">
         Submit
       </button>

@@ -30,6 +30,8 @@ form {
   justify-content: space-between;
   padding-bottom:10px;
   font-size: 20px;
+  border-bottom: 2px solid black;
+  grid-column: 1/3;
 }
 .title button{
   font-size: 20px;
@@ -43,11 +45,6 @@ form {
 label {
   text-align: right;
 }
-.title {
-  border-bottom: 2px solid black;
-  grid-column: 1/3;
-
-}
 .formButton {
   width: max-content;
   justify-self: center;
@@ -60,7 +57,16 @@ label {
   transition: background-color 0.3s ease;
   padding:10px 20px 10px 20px;
 }
-
 .formButton:hover {
   background-color: #2980b9;
+}
+.toggleDetail{
+  border:1px solid #d4d4d4;
+  display:flex;
+  justify-content: center;
+  cursor: pointer;
+  padding:10px 0px 10px 0px;
+}
+.toggleDetail:hover{
+  border: 1px solid black;
 }
