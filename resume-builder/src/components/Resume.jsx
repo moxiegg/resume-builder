@@ -31,7 +31,7 @@ export default function Resume({
                 </div>
                 <div className="duration">
                   {/* TODO:try formatting the date and add SVG */}
-                  {obj.from} to {obj.to}
+                  {obj.from} - {obj.to}
                 </div>
               </div>
             ))}
@@ -44,9 +44,8 @@ export default function Resume({
                 <div className="sub-title">{obj.techStack}</div>
                 <div className="project-description">
                   <ul>
-                    {/* FIXME:when the last statement has a full stop a new bullet point with no 
-                    content gets added */}
-                    {obj.description.split(".").map((point, index) => (
+                    {
+                      obj.description.split(".").slice(0,-1).map((point, index) => (
                       <li key={index}>{point}</li>
                     ))}
                   </ul>

@@ -32,7 +32,12 @@ function educationObj() {
   };
 }
 function projectObj() {
-  return { projectTitle: "Cool Site", techStack: "", description: "", selected: true };
+  return {
+    projectTitle: "Cool Site",
+    techStack: "",
+    description: "",
+    selected: true,
+  };
 }
 
 export default function App() {
@@ -40,7 +45,7 @@ export default function App() {
   const [personInfo, setPersonInfo] = useState(personObj);
   const [projectInfo, setProject] = useState([new projectObj()]);
   const [educationInfo, setEducation] = useState([new educationObj()]);
-
+  const [errorMsg , setError] = useState("");
   const toggleSelect = (e) => {
     const ind = e.target.getAttribute("data-index");
     const type = e.target.getAttribute("data-info");
@@ -73,7 +78,7 @@ export default function App() {
     const value = e.target.value;
     const parentId = e.target.parentNode.getAttribute("data-info");
     const ind = e.target.parentNode.getAttribute("data-index");
-    if (parentId == "person") setPersonInfo({...personInfo, [attr]: value });
+    if (parentId == "person") setPersonInfo({ ...personInfo, [attr]: value });
     else if (parentId == "project") {
       const temp = projectInfo.map((obj, i) => {
         if (i == ind) {
@@ -83,6 +88,19 @@ export default function App() {
       });
       setProject(temp);
     } else {
+      if (attr == "to") {
+        let startDate = educationInfo[ind].from;
+        if (startDate != "") {
+          if (new Date(value) < new Date(startDate)) setError("Invalid Date!!");
+          else setError("");
+        }
+      } else if (attr == "from") {
+        let endDate = educationInfo[ind].to;
+        if (endDate != "") {
+          if (new Date(endDate) < new Date(value)) setError("Invalid Date!!");
+          else setError("");
+        }
+      }
       const temp = educationInfo.map((obj, i) => {
         if (i == ind) {
           obj[attr] = value;
@@ -95,7 +113,9 @@ export default function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmit(true);
+
+    if(errorMsg.length==0)setSubmit(true);
+    else setError("Unable to Submit")
   };
 
   const handleEdit = () => {
@@ -128,9 +148,10 @@ export default function App() {
         handleChange={handleChange}
         handleAdd={handleAdd}
         toggleSelect={toggleSelect}
+        errorMsg={errorMsg}
       ></Form>
     );
-  } else {
+  } else{
     return (
       <Resume
         personInfo={personInfo}

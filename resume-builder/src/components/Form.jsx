@@ -8,10 +8,11 @@ export default function Form({
   handleSubmit,
   handleAdd,
   toggleSelect,
+  errorMsg
 }) {
   if (!personInfo) return <div>Error</div>;
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} required>
       <div className="formElement" data-info="person">
         <div className="title">Personal Info</div>
         <label htmlFor="name"> Name: </label>
@@ -53,6 +54,7 @@ export default function Form({
             </button>
           </div>
         </div>
+        {errorMsg.length!=0 && <div className="errorMsg">{errorMsg}</div>}
         {educationInfo.map((obj, i) => {
           if (obj.selected) {
             return (
@@ -76,21 +78,23 @@ export default function Form({
                   value={obj.course}
                   onChange={handleChange}
                 ></input>
-                {/* TODO:add logic for making sure the 'from' date is before 'to' date */}
                 <label htmlFor="from">From: </label>
                 <input
-                  type="date"
+                  type="number"
                   name="from"
                   value={obj.from}
                   onChange={handleChange}
-                  ></input>
-                  {/* TODO:try adding logic for entering present in 'to' date */}
+                  min="1960"
+                  max="2030"
+                ></input>
                 <label htmlFor="to">To: </label>
                 <input
-                  type="date"
+                  type="number"
                   name="to"
                   value={obj.to}
                   onChange={handleChange}
+                  min="1960"
+                  max="2030"
                 ></input>
               </div>
             );
@@ -127,10 +131,10 @@ export default function Form({
           if (obj.selected) {
             return (
               <div
-              className="formElement"
-              key={"project" + i}
-              data-info="project"
-              data-index={i}
+                className="formElement"
+                key={"project" + i}
+                data-info="project"
+                data-index={i}
               >
                 <label htmlFor="institute">Project Title: </label>
                 <input
@@ -156,7 +160,7 @@ export default function Form({
                 ></textarea>
               </div>
             );
-          }else{
+          } else {
             return (
               <div
                 key={"project" + i}
@@ -168,7 +172,6 @@ export default function Form({
                 {obj.projectTitle}
               </div>
             );
-            
           }
         })}
       </div>

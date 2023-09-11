@@ -70,3 +70,7 @@ label {
 .toggleDetail:hover{
   border: 1px solid black;
 }
+.errorMsg{
+  color:red;
+  font-weight: 200;
+}
